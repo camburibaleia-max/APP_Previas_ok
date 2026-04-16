@@ -13,36 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Instalar Gradle 8.4
-        run: |
-          wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip -O gradle.zip
-          unzip -q gradle.zip
-          echo "$(pwd)/gradle-8.4/bin" >> $GITHUB_PATH
-
-      - name: Baixar fonte Roboto-Bold
-        run: |
-          SETTINGS=$(find . -name "settings.gradle" | head -1)
-          DIR=$(dirname "$SETTINGS")
-          mkdir -p "$DIR/app/src/main/assets/fonts"
-          curl -L "https://github.com/google/fonts/raw/main/apache/roboto/static/Roboto-Bold.ttf" \
-            -o "$DIR/app/src/main/assets/fonts/Roboto-Bold.ttf"
-
-      - name: Compilar APK
-        run: |
-          SETTINGS=$(find . -name "settings.gradle" | head -1)
-          echo "settings.gradle encontrado em: $SETTINGS"
-          DIR=$(dirname "$SETTINGS")
-          echo "Compilando a partir de: $DIR"
-          cd "$DIR"
-          gradle assembleDebug --stacktrace
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: VideoCompiler-APK
-          path: "**/app/build/outputs/apk/debug/app-debug.apk"
-          retention-days: 30
+      - name: Listar todos os arquivos do repositório
+        run: find . -not -path "*/.git/*" | sort
