@@ -94,6 +94,7 @@ jobs:
 
       - name: Baixar fonte Roboto-Bold
         run: |
+          mkdir -p app/src/main/assets/fonts
           curl -L "https://github.com/google/fonts/raw/main/apache/roboto/static/Roboto-Bold.ttf" -o app/src/main/assets/fonts/Roboto-Bold.ttf
 
       - name: Compilar APK
