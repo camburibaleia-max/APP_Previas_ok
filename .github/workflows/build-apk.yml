@@ -97,6 +97,10 @@ jobs:
           mkdir -p app/src/main/assets/fonts
           curl -L "https://github.com/google/fonts/raw/main/apache/roboto/static/Roboto-Bold.ttf" -o app/src/main/assets/fonts/Roboto-Bold.ttf
 
+      - name: Criar gradle.properties
+        run: |
+          echo "YW5kcm9pZC51c2VBbmRyb2lkWD10cnVlCmFuZHJvaWQuZW5hYmxlSmV0aWZpZXI9dHJ1ZQpvcmcuZ3JhZGxlLmp2bWFyZ3M9LVhteDIwNDhtIC1EZmlsZS5lbmNvZGluZz1VVEYtOAo=" | base64 -d > gradle.properties
+
       - name: Compilar APK
         run: gradle assembleDebug --stacktrace
 
